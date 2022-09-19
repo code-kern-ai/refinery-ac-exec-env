@@ -35,6 +35,8 @@ def parse_data_to_record_dict(record_chunk):
 if __name__ == "__main__":
     _, iso2_code, payload_url = sys.argv
 
+    print("Preparing data for attribute calculation.")
+
     # This import statement will always be highlighted as a potential error, as during devtime,
     # the script `labeling_functions` does not exist. It will be inserted at runtime
     from attribute_calculators import ac
@@ -45,8 +47,11 @@ if __name__ == "__main__":
         docbin_data = json.load(infile)
 
     record_dict_list = parse_data_to_record_dict(docbin_data)
+
+    print("Running attribute calculation.")
     calculated_attribute_by_record_id = {}
     for record_dict in record_dict_list:
         calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
 
+    print("Finished execution.")
     requests.put(payload_url, json=calculated_attribute_by_record_id)
