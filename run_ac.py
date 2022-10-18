@@ -5,6 +5,22 @@ import sys
 from spacy.tokens import DocBin
 
 
+def get_check_data_type_function(data_type):
+    if data_type == "INTEGER":
+        py_data_type = int
+    elif data_type == "FLOAT":
+        py_data_type = float
+    elif data_type == "BOOLEAN":
+        py_data_type = bool
+    elif data_type == "CATEGORY":
+        py_data_type = str
+    elif data_type == "TEXT":
+        py_data_type = str
+    else:
+        raise ValueError(f"Unknown data type: {data_type}")
+    return py_data_type, lambda f: isinstance(f, py_data_type)
+
+
 def load_data_dict(record):
     if record["bytes"][:2] == "\\x":
         record["bytes"] = record["bytes"][2:]
@@ -33,7 +49,7 @@ def parse_data_to_record_dict(record_chunk):
 
 
 if __name__ == "__main__":
-    _, iso2_code, payload_url = sys.argv
+    _, iso2_code, payload_url, data_type = sys.argv
 
     print("Preparing data for attribute calculation.")
 
@@ -48,9 +64,17 @@ if __name__ == "__main__":
 
     record_dict_list = parse_data_to_record_dict(docbin_data)
 
+    py_data_type, check_data_type = get_check_data_type_function(data_type)
+
     print("Running attribute calculation.")
     calculated_attribute_by_record_id = {}
     for record_dict in record_dict_list:
+        attr_value = ac(record_dict["data"])
+        if not check_data_type(attr_value):
+            raise ValueError(
+                f"Attribute value {attr_value} is of type {type(attr_value)}, "
+                f"but data_type {data_type} requires {str(py_data_type)}."
+            )
         calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
 
     print("Finished execution.")
