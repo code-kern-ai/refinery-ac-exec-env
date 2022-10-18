@@ -72,7 +72,7 @@ if __name__ == "__main__":
         attr_value = ac(record_dict["data"])
         if not check_data_type(attr_value):
             raise ValueError(
-                f"Attribute value {attr_value} is of type {type(attr_value)}, "
+                f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
                 f"but data_type {data_type} requires {str(py_data_type)}."
             )
         calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
