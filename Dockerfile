@@ -1,9 +1,9 @@
-FROM python:3.9-slim
+FROM kernai/refinery-parent-images:v0.0.1-exec-env
 
-RUN apt update && apt install -y curl
+COPY requirements.txt .
+
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
-
-RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["/run.sh"] 
