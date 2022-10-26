@@ -1,10 +1,10 @@
-FROM python:3.10-slim
-
-RUN apt update && apt install -y curl
+FROM kernai/refinery-parent-images:v1.5.0-exec-env
 
 COPY requirements.txt .
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+COPY requirements.txt .
 
 COPY . .
 
