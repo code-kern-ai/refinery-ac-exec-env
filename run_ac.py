@@ -7,20 +7,39 @@ from spacy.tokens import DocBin
 
 def get_check_data_type_function(data_type):
     if data_type == "INTEGER":
-        py_data_types = [int]
+        return [int], __check_data_type_integer
     elif data_type == "FLOAT":
-        py_data_types = [int, float]
+        return [int, float], __check_data_type_float
     elif data_type == "BOOLEAN":
-        py_data_types = [bool]
+        return [bool], __check_data_type_boolean
     elif data_type == "CATEGORY":
         return [str], __check_data_type_category
     elif data_type == "TEXT":
-        py_data_types = [str]
+        return [str], __check_data_type_text
     else:
         raise ValueError(f"Unknown data type: {data_type}")
-    return py_data_types, lambda f: any(
-        [isinstance(f, py_data_type) for py_data_type in py_data_types]
-    )
+
+
+def __check_data_type_integer(attr_value):
+    if attr_value is not None and not isinstance(attr_value, int):
+        return False
+    return True
+
+
+def __check_data_type_float(attr_value):
+    if (
+        attr_value is not None
+        and not isinstance(attr_value, float)
+        and not isinstance(attr_value, int)
+    ):
+        return False
+    return True
+
+
+def __check_data_type_boolean(attr_value):
+    if not isinstance(attr_value, bool):
+        return False
+    return True
 
 
 def __check_data_type_category(attr_value):
@@ -28,6 +47,12 @@ def __check_data_type_category(attr_value):
         return False
     if attr_value == "":
         raise ValueError("Category cannot be empty string")
+    return True
+
+
+def __check_data_type_text(attr_value):
+    if not isinstance(attr_value, str):
+        return False
     return True
 
 
