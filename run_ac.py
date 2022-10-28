@@ -13,7 +13,7 @@ def get_check_data_type_function(data_type):
     elif data_type == "BOOLEAN":
         py_data_types = [bool]
     elif data_type == "CATEGORY":
-        py_data_types = [str]
+        return [str], __check_data_type_category
     elif data_type == "TEXT":
         py_data_types = [str]
     else:
@@ -21,6 +21,14 @@ def get_check_data_type_function(data_type):
     return py_data_types, lambda f: any(
         [isinstance(f, py_data_type) for py_data_type in py_data_types]
     )
+
+
+def __check_data_type_category(attr_value):
+    if not isinstance(attr_value, str):
+        return False
+    if attr_value == "":
+        raise ValueError("Category cannot be empty string")
+    return True
 
 
 def load_data_dict(record):
