@@ -14,11 +14,16 @@ blis==0.7.9
     # via
     #   -r requirements/exec-env-requirements.txt
     #   thinc
+cachetools==5.3.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   textacy
 catalogue==2.0.8
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   srsly
+    #   textacy
     #   thinc
 certifi==2022.12.7
     # via
@@ -48,6 +53,10 @@ cymem==2.0.7
     #   preshed
     #   spacy
     #   thinc
+cytoolz==0.12.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   textacy
 docopt==0.6.2
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -70,6 +79,10 @@ inflect==6.0.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
+jellyfish==0.9.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   textacy
 jinja2==3.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -79,6 +92,7 @@ joblib==1.2.0
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   scikit-learn
+    #   textacy
 langcodes==3.3.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -109,6 +123,10 @@ murmurhash==1.0.9
     #   preshed
     #   spacy
     #   thinc
+networkx==3.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   textacy
 nltk==3.7
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -128,10 +146,11 @@ numpy==1.23.4
     #   scikit-learn
     #   scipy
     #   spacy
+    #   textacy
     #   thinc
 openai==0.25.0
     # via -r requirements/exec-env-requirements.txt
-openpyxl==3.0.10
+openpyxl==3.1.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
@@ -145,7 +164,7 @@ pandas==1.5.3
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
     #   openai
-pandas-stubs==1.5.2.230105
+pandas-stubs==1.5.3.230214
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
@@ -160,7 +179,7 @@ preshed==3.0.8
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-pydantic==1.10.4
+pydantic==1.10.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   confection
@@ -170,6 +189,7 @@ pydantic==1.10.4
 pyphen==0.13.2
     # via
     #   -r requirements/exec-env-requirements.txt
+    #   textacy
     #   textstat
 python-dateutil==2.8.2
     # via
@@ -198,17 +218,20 @@ requests==2.28.1
     #   lexmo
     #   openai
     #   spacy
+    #   textacy
     #   translate
     #   vadersentiment
 scikit-learn==1.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   bayesian-optimization
-scipy==1.10.0
+    #   textacy
+scipy==1.10.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   bayesian-optimization
     #   scikit-learn
+    #   textacy
 six==1.16.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -218,12 +241,14 @@ smart-open==6.3.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pathy
-soupsieve==2.3.2.post1
+soupsieve==2.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   beautifulsoup4
 spacy==3.4.2
-    # via -r requirements/exec-env-requirements.txt
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   textacy
 spacy-legacy==3.0.12
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -240,6 +265,8 @@ srsly==2.4.5
     #   thinc
 stemming==1.0.1
     # via -r requirements/exec-env-requirements.txt
+textacy==0.12.0
+    # via -r requirements/exec-env-requirements.txt
 textblob==0.17.1
     # via -r requirements/exec-env-requirements.txt
 textstat==0.7.3
@@ -252,12 +279,17 @@ threadpoolctl==3.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-learn
+toolz==0.12.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   cytoolz
 tqdm==4.64.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   openai
     #   spacy
+    #   textacy
 translate==3.6.1
     # via -r requirements/exec-env-requirements.txt
 typer==0.4.2
@@ -265,11 +297,11 @@ typer==0.4.2
     #   -r requirements/exec-env-requirements.txt
     #   pathy
     #   spacy
-types-pytz==2022.7.1.0
+types-pytz==2022.7.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas-stubs
-typing-extensions==4.4.0
+typing-extensions==4.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
