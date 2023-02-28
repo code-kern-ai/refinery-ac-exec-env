@@ -4,8 +4,6 @@
 #
 #    pip-compile --output-file=requirements.txt requirements/requirements.in
 #
-bayesian-optimization==1.4.2
-    # via -r requirements/exec-env-requirements.txt
 beautifulsoup4==4.11.1
     # via -r requirements/exec-env-requirements.txt
 better-profanity==0.7.0
@@ -39,10 +37,6 @@ click==8.1.3
     #   nltk
     #   translate
     #   typer
-colorama==0.4.6
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   bayesian-optimization
 confection==0.0.4
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -92,6 +86,7 @@ joblib==1.2.0
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   scikit-learn
+    #   scikit-optimize
     #   textacy
 langcodes==3.3.0
     # via
@@ -139,11 +134,11 @@ num2words==0.5.12
 numpy==1.23.4
     # via
     #   -r requirements/exec-env-requirements.txt
-    #   bayesian-optimization
     #   blis
     #   openai
     #   pandas
     #   scikit-learn
+    #   scikit-optimize
     #   scipy
     #   spacy
     #   textacy
@@ -164,7 +159,7 @@ pandas==1.5.3
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
     #   openai
-pandas-stubs==1.5.3.230214
+pandas-stubs==1.5.3.230227
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
@@ -179,6 +174,10 @@ preshed==3.0.8
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
+pyaml==21.10.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   scikit-optimize
 pydantic==1.10.5
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -201,6 +200,10 @@ pytz==2022.7.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
+pyyaml==6.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   pyaml
 quantulum3==0.7.11
     # via -r requirements/exec-env-requirements.txt
 rapidfuzz==2.13.7
@@ -224,13 +227,15 @@ requests==2.28.1
 scikit-learn==1.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
-    #   bayesian-optimization
+    #   scikit-optimize
     #   textacy
+scikit-optimize==0.9.0
+    # via -r requirements/exec-env-requirements.txt
 scipy==1.10.1
     # via
     #   -r requirements/exec-env-requirements.txt
-    #   bayesian-optimization
     #   scikit-learn
+    #   scikit-optimize
     #   textacy
 six==1.16.0
     # via
