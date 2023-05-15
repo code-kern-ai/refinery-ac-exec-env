@@ -106,11 +106,12 @@ if __name__ == "__main__":
     idx = 0
     progress_size = 500
     amount = len(record_dict_list)
-    print("progress: ", 0.0, flush=True)
+    print(f"progress:{0.0}", flush=True)
     for record_dict in record_dict_list:
         idx += 1
         if idx % progress_size == 0:
-            print("progress: ", round(idx / amount, 2), flush=True)
+            progress = round(idx / amount, 2)
+            print(f"progress:{progress}", flush=True)
         attr_value = ac(record_dict["data"])
         if not check_data_type(attr_value):
             raise ValueError(
@@ -119,6 +120,6 @@ if __name__ == "__main__":
                 f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
             )
         calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
-    print("progress: ", 1.0, flush=True)
+    print(f"progress:{1.0}", flush=True)
     print("Finished execution.")
     requests.put(payload_url, json=calculated_attribute_by_record_id)
