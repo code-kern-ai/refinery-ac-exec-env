@@ -106,7 +106,7 @@ if __name__ == "__main__":
     print("Running attribute calculation.")
     calculated_attribute_by_record_id = {}
     idx = 0
-    progress_size = 500
+    progress_size = 100
     amount = len(record_dict_list)
     __print_progress(0.0)
     for record_dict in record_dict_list:
