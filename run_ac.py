@@ -56,7 +56,7 @@ def __check_data_type_text(attr_value):
     return True
 
 def __print_progress(progress: float) -> None:
-    print(f":progress:{progress}", flush=True)
+    print(f"progress: {progress}", flush=True)
 
 def load_data_dict(record):
     if record["bytes"][:2] == "\\x":
