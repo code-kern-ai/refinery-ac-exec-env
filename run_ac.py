@@ -121,7 +121,7 @@ if __name__ == "__main__":
                 f"but data_type {data_type} requires "
                 f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
             )
-        calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
+        calculated_attribute_by_record_id[record_dict["id"]] = attr_value
     __print_progress(1.0)
     print("Finished execution.")
     requests.put(payload_url, json=calculated_attribute_by_record_id)
