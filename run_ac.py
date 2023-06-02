@@ -55,6 +55,8 @@ def __check_data_type_text(attr_value):
         return False
     return True
 
+def __print_progress(progress: float) -> None:
+    print(f"progress: {progress}", flush=True)
 
 def load_data_dict(record):
     if record["bytes"][:2] == "\\x":
@@ -66,7 +68,7 @@ def load_data_dict(record):
     doc_bin_loaded = DocBin().from_bytes(byte)
     docs = list(doc_bin_loaded.get_docs(vocab))
     data_dict = {}
-    for (col, doc) in zip(record["columns"], docs):
+    for col, doc in zip(record["columns"], docs):
         data_dict[col] = doc
 
     for key in record:
@@ -103,7 +105,15 @@ if __name__ == "__main__":
 
     print("Running attribute calculation.")
     calculated_attribute_by_record_id = {}
+    idx = 0
+    progress_size = 100
+    amount = len(record_dict_list)
+    __print_progress(0.0)
     for record_dict in record_dict_list:
+        idx += 1
+        if idx % progress_size == 0:
+            progress = round(idx / amount, 2)
+            __print_progress(progress)
         attr_value = ac(record_dict["data"])
         if not check_data_type(attr_value):
             raise ValueError(
@@ -111,7 +121,7 @@ if __name__ == "__main__":
                 f"but data_type {data_type} requires "
                 f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
             )
-        calculated_attribute_by_record_id[record_dict["id"]] = ac(record_dict["data"])
-
+        calculated_attribute_by_record_id[record_dict["id"]] = attr_value
+    __print_progress(1.0)
     print("Finished execution.")
     requests.put(payload_url, json=calculated_attribute_by_record_id)
