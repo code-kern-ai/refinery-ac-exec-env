@@ -62,7 +62,7 @@ def __check_data_type_embedding_lis(attr_value):
     if not isinstance(attr_value, list):
         return False
     for e in attr_value:
-        if not isinstance(e, str):
+        if not isinstance(e, str) or len(e) == 0:
             return False
     return True
 
