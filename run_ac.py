@@ -16,6 +16,8 @@ def get_check_data_type_function(data_type):
         return [str], __check_data_type_category
     elif data_type == "TEXT":
         return [str], __check_data_type_text
+    elif data_type == "EMBEDDING_LIST":
+        return [list], __check_data_type_embedding_list
     else:
         raise ValueError(f"Unknown data type: {data_type}")
 
@@ -55,8 +57,19 @@ def __check_data_type_text(attr_value):
         return False
     return True
 
+
+def __check_data_type_embedding_list(attr_value):
+    if not isinstance(attr_value, list):
+        return False
+    for e in attr_value:
+        if not isinstance(e, str) or len(e) == 0:
+            raise ValueError("List entries need to be strings with a length > 0.")
+    return True
+
+
 def __print_progress(progress: float) -> None:
     print(f"progress: {progress}", flush=True)
+
 
 def load_data_dict(record):
     if record["bytes"][:2] == "\\x":
