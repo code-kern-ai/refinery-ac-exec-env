@@ -63,7 +63,7 @@ def __check_data_type_embedding_list(attr_value):
         return False
     for e in attr_value:
         if not isinstance(e, str) or len(e) == 0:
-            raise ValueError("List entries need to be strings with a length > 0")
+            raise ValueError("List entries need to be strings with a length > 0.")
     return True
 
 
