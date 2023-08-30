@@ -17,7 +17,7 @@ def get_check_data_type_function(data_type):
     elif data_type == "TEXT":
         return [str], __check_data_type_text
     elif data_type == "EMBEDDING_LIST":
-        return [list], __check_data_type_embedding_lis
+        return [list], __check_data_type_embedding_list
     else:
         raise ValueError(f"Unknown data type: {data_type}")
 
@@ -58,12 +58,12 @@ def __check_data_type_text(attr_value):
     return True
 
 
-def __check_data_type_embedding_lis(attr_value):
+def __check_data_type_embedding_list(attr_value):
     if not isinstance(attr_value, list):
         return False
     for e in attr_value:
         if not isinstance(e, str) or len(e) == 0:
-            return False
+            raise ValueError("List entries need to be strings with a length > 0")
     return True
 
 
