@@ -271,7 +271,7 @@ typing-extensions==4.7.1
     #   sqlalchemy
 tzdata==2023.3
     # via pandas
-urllib3==2.0.4
+urllib3==2.0.6
     # via requests
 vadersentiment==3.3.2
     # via -r exec-env-requirements.in
