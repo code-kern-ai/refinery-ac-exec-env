@@ -375,7 +375,7 @@ tzdata==2023.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
-urllib3==2.0.6
+urllib3==2.0.7
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
