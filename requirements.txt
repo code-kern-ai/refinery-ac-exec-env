@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt requirements/requirements.in
 #
-aiohttp==3.9.3
+aiohttp==3.9.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
@@ -123,7 +123,7 @@ hijri-converter==2.3.1
     #   holidays
 holidays==0.21.13
     # via -r requirements/exec-env-requirements.txt
-httpcore==1.0.4
+httpcore==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpx
@@ -131,14 +131,18 @@ httpx==0.27.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
-idna==3.6
+idna==3.7
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
     #   httpx
     #   requests
     #   yarl
-inflect==7.0.0
+importlib-metadata==7.1.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   typeguard
+inflect==7.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
@@ -150,7 +154,7 @@ jinja2==3.1.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-joblib==1.3.2
+joblib==1.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
@@ -179,7 +183,7 @@ libretranslatepy==2.1.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   translate
-lxml==5.1.0
+lxml==5.2.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
@@ -188,6 +192,10 @@ markupsafe==2.1.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   jinja2
+more-itertools==10.2.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   inflect
 multidict==6.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -226,12 +234,12 @@ numpy==1.23.4
     #   thinc
 openai==0.27.7
     # via -r requirements/exec-env-requirements.txt
-packaging==23.2
+packaging==24.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-pandas==2.2.1
+pandas==2.2.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
@@ -258,12 +266,11 @@ pycountry==23.12.11
     # via
     #   -r requirements/exec-env-requirements.txt
     #   sumy
-pydantic==1.10.14
+pydantic==1.10.15
     # via
     #   -r requirements/exec-env-requirements.txt
     #   confection
     #   groq
-    #   inflect
     #   spacy
     #   thinc
 pymeeus==0.5.12
@@ -321,7 +328,7 @@ scikit-learn==1.1.2
     #   textacy
 scikit-optimize==0.9.0
     # via -r requirements/exec-env-requirements.txt
-scipy==1.12.0
+scipy==1.13.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-learn
@@ -359,7 +366,7 @@ spacy-loggers==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sqlalchemy==2.0.28
+sqlalchemy==2.0.29
     # via
     #   -r requirements/exec-env-requirements.txt
     #   knowledge
@@ -371,7 +378,7 @@ srsly==2.4.8
     #   thinc
 stemming==1.0.1
     # via -r requirements/exec-env-requirements.txt
-sudachidict-core==20240109
+sudachidict-core==20240409
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -392,7 +399,7 @@ thinc==8.1.12
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-threadpoolctl==3.3.0
+threadpoolctl==3.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-learn
@@ -411,12 +418,16 @@ tqdm==4.66.2
     #   textacy
 translate==3.6.1
     # via -r requirements/exec-env-requirements.txt
+typeguard==4.2.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   inflect
 typer==0.4.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pathy
     #   spacy
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
@@ -424,6 +435,7 @@ typing-extensions==4.10.0
     #   inflect
     #   pydantic
     #   sqlalchemy
+    #   typeguard
 tzdata==2024.1
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -443,6 +455,10 @@ yarl==1.9.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
+zipp==3.18.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
