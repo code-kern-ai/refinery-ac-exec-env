@@ -291,7 +291,7 @@ tiktoken==0.4.0
     # via -r exec-env-requirements.in
 toolz==0.12.1
     # via cytoolz
-tqdm==4.66.2
+tqdm==4.66.3
     # via
     #   nltk
     #   openai
