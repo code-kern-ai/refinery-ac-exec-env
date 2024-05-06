@@ -100,7 +100,7 @@ inflect==7.2.0
     # via quantulum3
 jellyfish==1.0.3
     # via textacy
-jinja2==3.1.3
+jinja2==3.1.4
     # via spacy
 joblib==1.4.0
     # via
