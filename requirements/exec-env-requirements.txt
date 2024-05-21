@@ -214,7 +214,7 @@ regex==2023.12.25
     # via
     #   nltk
     #   tiktoken
-requests==2.31.0
+requests==2.32.0
     # via
     #   -r exec-env-requirements.in
     #   google-search-results
