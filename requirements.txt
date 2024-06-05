@@ -306,7 +306,7 @@ regex==2024.5.15
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   tiktoken
-requests==2.32.3
+requests==2.31.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   google-search-results
@@ -394,7 +394,7 @@ textblob==0.17.1
     # via -r requirements/exec-env-requirements.txt
 textstat==0.7.3
     # via -r requirements/exec-env-requirements.txt
-thinc==8.2.3
+thinc==8.2.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -459,7 +459,7 @@ weasel==0.3.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-zipp==3.19.1
+zipp==3.19.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   importlib-metadata
