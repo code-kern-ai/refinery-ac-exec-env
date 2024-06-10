@@ -4,12 +4,27 @@
 #
 #    pip-compile --output-file=requirements.txt requirements/requirements.in
 #
+aiohttp==3.9.5
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   openai
+aiosignal==1.3.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
 anyio==4.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
     #   httpx
-    #   openai
+async-timeout==4.0.3
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
+attrs==23.2.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
 beautifulsoup4==4.11.1
     # via -r requirements/exec-env-requirements.txt
 better-profanity==0.7.0
@@ -75,7 +90,6 @@ distro==1.9.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
-    #   openai
 docopt==0.6.2
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -92,6 +106,11 @@ floret==0.10.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
+frozenlist==1.4.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
+    #   aiosignal
 fuzzywuzzy==0.18.0
     # via -r requirements/exec-env-requirements.txt
 google-search-results==2.4.1
@@ -116,13 +135,13 @@ httpx==0.27.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
-    #   openai
 idna==3.7
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
     #   httpx
     #   requests
+    #   yarl
 importlib-metadata==7.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -189,6 +208,11 @@ more-itertools==10.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
+multidict==6.0.5
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
+    #   yarl
 murmurhash==1.0.10
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -221,9 +245,9 @@ numpy==1.23.4
     #   spacy
     #   textacy
     #   thinc
-openai==1.30.5
+openai==0.27.7
     # via -r requirements/exec-env-requirements.txt
-packaging==24.0
+packaging==24.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -260,7 +284,6 @@ pydantic==1.10.15
     #   -r requirements/exec-env-requirements.txt
     #   confection
     #   groq
-    #   openai
     #   spacy
     #   thinc
 pymeeus==0.5.12
@@ -304,6 +327,7 @@ requests==2.31.0
     #   -r requirements/exec-env-requirements.txt
     #   google-search-results
     #   lexmo
+    #   openai
     #   spacy
     #   sumy
     #   textacy
@@ -338,7 +362,6 @@ sniffio==1.3.1
     #   anyio
     #   groq
     #   httpx
-    #   openai
 soupsieve==2.5
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -416,13 +439,12 @@ typer==0.4.2
     #   -r requirements/exec-env-requirements.txt
     #   pathy
     #   spacy
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
     #   groq
     #   inflect
-    #   openai
     #   pydantic
     #   sqlalchemy
     #   typeguard
@@ -441,6 +463,10 @@ wasabi==0.10.1
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
+yarl==1.9.4
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   aiohttp
 zipp==3.19.2
     # via
     #   -r requirements/exec-env-requirements.txt
