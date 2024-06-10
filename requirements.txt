@@ -4,10 +4,6 @@
 #
 #    pip-compile --output-file=requirements.txt requirements/requirements.in
 #
-annotated-types==0.7.0
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   pydantic
 anyio==4.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -57,15 +53,10 @@ click==8.1.7
     #   nltk
     #   translate
     #   typer
-cloudpathlib==0.16.0
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   weasel
 confection==0.1.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   thinc
-    #   weasel
 convertdate==2.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -186,7 +177,7 @@ lxml==5.2.2
     #   -r requirements/exec-env-requirements.txt
     #   breadability
     #   translate
-marisa-trie==1.1.1
+marisa-trie==1.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   language-data
@@ -237,11 +228,18 @@ packaging==24.0
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-    #   weasel
 pandas==2.2.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
+pathlib-abc==0.1.1
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   pathy
+pathy==0.11.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   spacy
 phonenumbers==8.13.0
     # via -r requirements/exec-env-requirements.txt
 preshed==3.0.9
@@ -257,7 +255,7 @@ pycountry==24.6.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   sumy
-pydantic==2.7.3
+pydantic==1.10.15
     # via
     #   -r requirements/exec-env-requirements.txt
     #   confection
@@ -265,11 +263,6 @@ pydantic==2.7.3
     #   openai
     #   spacy
     #   thinc
-    #   weasel
-pydantic-core==2.18.4
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   pydantic
 pymeeus==0.5.12
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -317,7 +310,6 @@ requests==2.31.0
     #   tiktoken
     #   translate
     #   vadersentiment
-    #   weasel
 scikit-learn==1.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -339,8 +331,7 @@ six==1.16.0
 smart-open==6.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
-    #   spacy
-    #   weasel
+    #   pathy
 sniffio==1.3.1
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -352,7 +343,7 @@ soupsieve==2.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   beautifulsoup4
-spacy[ja]==3.7.4
+spacy[ja]==3.4.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -374,7 +365,6 @@ srsly==2.4.8
     #   confection
     #   spacy
     #   thinc
-    #   weasel
 stemming==1.0.1
     # via -r requirements/exec-env-requirements.txt
 sudachidict-core==20240409
@@ -394,7 +384,7 @@ textblob==0.17.1
     # via -r requirements/exec-env-requirements.txt
 textstat==0.7.3
     # via -r requirements/exec-env-requirements.txt
-thinc==8.2.4
+thinc==8.1.12
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -421,24 +411,21 @@ typeguard==4.3.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
-typer==0.9.4
+typer==0.4.2
     # via
     #   -r requirements/exec-env-requirements.txt
+    #   pathy
     #   spacy
-    #   weasel
 typing-extensions==4.12.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
-    #   cloudpathlib
     #   groq
     #   inflect
     #   openai
     #   pydantic
-    #   pydantic-core
     #   sqlalchemy
     #   typeguard
-    #   typer
 tzdata==2024.1
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -449,16 +436,11 @@ urllib3==2.2.1
     #   requests
 vadersentiment==3.3.2
     # via -r requirements/exec-env-requirements.txt
-wasabi==1.1.3
+wasabi==0.10.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-    #   weasel
-weasel==0.3.4
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   spacy
 zipp==3.19.2
     # via
     #   -r requirements/exec-env-requirements.txt
