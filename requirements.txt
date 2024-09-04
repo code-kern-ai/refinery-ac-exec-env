@@ -54,7 +54,7 @@ catalogue==2.0.10
     #   srsly
     #   textacy
     #   thinc
-certifi==2024.7.4
+certifi==2024.8.30
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpcore
@@ -232,7 +232,7 @@ networkx==3.2.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
-nltk==3.9.1
+nltk==3.8.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
@@ -346,7 +346,7 @@ requests==2.31.0
     #   translate
     #   vadersentiment
     #   weasel
-scikit-learn==1.5.0
+scikit-learn==1.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-optimize
@@ -391,7 +391,7 @@ spacy-loggers==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sqlalchemy==2.0.32
+sqlalchemy==2.0.33
     # via
     #   -r requirements/exec-env-requirements.txt
     #   knowledge
@@ -482,7 +482,7 @@ wasabi==0.10.1
     #   weasel
 weasel==0.4.1
     # via spacy
-yarl==1.9.4
+yarl==1.9.8
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
