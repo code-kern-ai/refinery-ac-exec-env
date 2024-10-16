@@ -4,11 +4,11 @@
 #
 #    pip-compile --output-file=requirements.txt --strip-extras requirements/requirements.in
 #
-aiohappyeyeballs==2.4.0
+aiohappyeyeballs==2.4.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
-aiohttp==3.10.5
+aiohttp==3.10.10
     # via
     #   -r requirements/exec-env-requirements.txt
     #   openai
@@ -18,7 +18,7 @@ aiosignal==1.3.1
     #   aiohttp
 annotated-types==0.7.0
     # via pydantic
-anyio==4.4.0
+anyio==4.6.2.post1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
@@ -64,7 +64,7 @@ chardet==5.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
@@ -91,7 +91,7 @@ cymem==2.0.8
     #   preshed
     #   spacy
     #   thinc
-cytoolz==0.12.3
+cytoolz==1.0.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -136,7 +136,7 @@ hijri-converter==2.3.1
     #   holidays
 holidays==0.21.13
     # via -r requirements/exec-env-requirements.txt
-httpcore==1.0.5
+httpcore==1.0.6
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpx
@@ -144,18 +144,18 @@ httpx==0.27.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
-idna==3.8
+idna==3.10
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
     #   httpx
     #   requests
     #   yarl
-importlib-metadata==8.4.0
+importlib-metadata==8.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   typeguard
-inflect==7.3.1
+inflect==7.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
@@ -180,7 +180,7 @@ korean-lunar-calendar==0.3.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   holidays
-langcodes==3.4.0
+langcodes==3.4.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -205,19 +205,19 @@ lxml==5.3.0
     #   -r requirements/exec-env-requirements.txt
     #   breadability
     #   translate
-marisa-trie==1.2.0
+marisa-trie==1.2.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   language-data
-markupsafe==2.1.5
+markupsafe==3.0.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   jinja2
-more-itertools==10.4.0
+more-itertools==10.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
-multidict==6.0.5
+multidict==6.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
@@ -262,7 +262,7 @@ packaging==24.1
     #   spacy
     #   thinc
     #   weasel
-pandas==2.2.2
+pandas==2.2.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
@@ -279,7 +279,11 @@ preshed==3.0.9
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-pyaml==24.7.0
+propcache==0.2.0
+    # via
+    #   -r requirements/exec-env-requirements.txt
+    #   yarl
+pyaml==24.9.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-optimize
@@ -314,7 +318,7 @@ python-dateutil==2.9.0.post0
     #   pandas
 python-levenshtein==0.20.8
     # via -r requirements/exec-env-requirements.txt
-pytz==2024.1
+pytz==2024.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
@@ -328,7 +332,7 @@ rapidfuzz==2.15.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   levenshtein
-regex==2024.7.24
+regex==2024.9.11
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
@@ -391,7 +395,7 @@ spacy-loggers==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sqlalchemy==2.0.33
+sqlalchemy==2.0.36
     # via
     #   -r requirements/exec-env-requirements.txt
     #   knowledge
@@ -431,7 +435,7 @@ threadpoolctl==3.5.0
     #   scikit-learn
 tiktoken==0.4.0
     # via -r requirements/exec-env-requirements.txt
-toolz==0.12.1
+toolz==1.0.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   cytoolz
@@ -460,15 +464,16 @@ typing-extensions==4.12.2
     #   anyio
     #   cloudpathlib
     #   groq
+    #   multidict
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
     #   typeguard
-tzdata==2024.1
+tzdata==2024.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
@@ -482,11 +487,11 @@ wasabi==0.10.1
     #   weasel
 weasel==0.4.1
     # via spacy
-yarl==1.9.8
+yarl==1.15.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
-zipp==3.20.1
+zipp==3.20.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   importlib-metadata
