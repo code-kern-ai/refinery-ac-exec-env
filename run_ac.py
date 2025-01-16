@@ -2,6 +2,7 @@ import json
 import requests
 import spacy
 import sys
+from mustache import prepare_and_render_mustache
 from spacy.tokens import DocBin
 
 
@@ -18,6 +19,8 @@ def get_check_data_type_function(data_type):
         return [str], __check_data_type_text
     elif data_type == "EMBEDDING_LIST":
         return [list], __check_data_type_embedding_list
+    elif data_type == "LLM_RESPONSE":
+        return [str], __check_data_type_text
     else:
         raise ValueError(f"Unknown data type: {data_type}")
 
@@ -105,7 +108,7 @@ if __name__ == "__main__":
 
     # This import statement will always be highlighted as a potential error, as during devtime,
     # the script `labeling_functions` does not exist. It will be inserted at runtime
-    from attribute_calculators import ac
+    import attribute_calculators
 
     vocab = spacy.blank(iso2_code).vocab
 
@@ -123,11 +126,15 @@ if __name__ == "__main__":
     amount = len(record_dict_list)
     __print_progress(0.0)
     for record_dict in record_dict_list:
+        attribute_calculators.USER_PROMPT = prepare_and_render_mustache(
+            attribute_calculators.USER_PROMPT, record_dict
+        )
+
         idx += 1
         if idx % progress_size == 0:
             progress = round(idx / amount, 2)
             __print_progress(progress)
-        attr_value = ac(record_dict["data"])
+        attr_value = attribute_calculators.ac(record_dict["data"])
         if not check_data_type(attr_value):
             raise ValueError(
                 f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
