@@ -110,7 +110,7 @@ if __name__ == "__main__":
     # the script `labeling_functions` does not exist. It will be inserted at runtime
     import attribute_calculators
 
-    DEFAULT_USER_PROMPT = attribute_calculators.USER_PROMPT
+    DEFAULT_USER_PROMPT_A2VYBG = attribute_calculators.USER_PROMPT_A2VYBG
 
     vocab = spacy.blank(iso2_code).vocab
 
@@ -128,8 +128,8 @@ if __name__ == "__main__":
     amount = len(record_dict_list)
     __print_progress(0.0)
     for record_dict in record_dict_list:
-        attribute_calculators.USER_PROMPT = prepare_and_render_mustache(
-            DEFAULT_USER_PROMPT, record_dict
+        attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
+            DEFAULT_USER_PROMPT_A2VYBG, record_dict
         )
 
         idx += 1
