@@ -126,10 +126,10 @@ if __name__ == "__main__":
     print("Running attribute calculation.")
     calculated_attribute_by_record_id = {}
     idx = 0
-    progress_size = 100
     amount = len(record_dict_list)
-    current_progress = 0.0
-    __print_progress(current_progress)
+    progress_size = min(100, amount // 10)
+    processed_records = 0
+    __print_progress(processed_records / amount)
 
     async def process_llm_record_batch(record_dict_batch: list):
         """Process a batch of record_dicts, writes results into shared var calculated_attribute_by_record_id."""
@@ -148,10 +148,10 @@ if __name__ == "__main__":
                     f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
                 )
             calculated_attribute_by_record_id[record_dict["id"]] = attr_value
-
-        global current_progress
-        current_progress = current_progress + len(record_dict_batch) / amount
-        __print_progress(round(current_progress, 2))
+            global processed_records
+            processed_records = processed_records + 1
+            if processed_records % progress_size == 0:
+                __print_progress(round(processed_records / amount, 2))
 
     async def process_async_llm_calls(record_dict_list):
         batch_size = max(
