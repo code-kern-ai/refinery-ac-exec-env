@@ -149,8 +149,8 @@ if __name__ == "__main__":
             calculated_attribute_by_record_id[record_dict["id"]] = attr_value
 
     async def process_async_llm_calls(record_dict_list):
-        batch_size = len(record_dict_list) // int(
-            attribute_calculators.NUM_WORKERS_A2VYBG
+        batch_size = max(
+            len(record_dict_list) // int(attribute_calculators.NUM_WORKERS_A2VYBG), 1
         )
         record_dict_batches = [
             record_dict_list[i : i + batch_size]
