@@ -2,6 +2,7 @@ import json
 import requests
 import spacy
 import sys
+import asyncio
 from mustache import prepare_and_render_mustache
 from spacy.tokens import DocBin
 
@@ -110,7 +111,8 @@ if __name__ == "__main__":
     # the script `labeling_functions` does not exist. It will be inserted at runtime
     import attribute_calculators
 
-    DEFAULT_USER_PROMPT_A2VYBG = attribute_calculators.USER_PROMPT_A2VYBG
+    if data_type == "LLM_RESPONSE":
+        DEFAULT_USER_PROMPT_A2VYBG = attribute_calculators.USER_PROMPT_A2VYBG
 
     vocab = spacy.blank(iso2_code).vocab
 
@@ -127,23 +129,53 @@ if __name__ == "__main__":
     progress_size = 100
     amount = len(record_dict_list)
     __print_progress(0.0)
-    for record_dict in record_dict_list:
-        attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
-            DEFAULT_USER_PROMPT_A2VYBG, record_dict
-        )
 
-        idx += 1
-        if idx % progress_size == 0:
-            progress = round(idx / amount, 2)
-            __print_progress(progress)
-        attr_value = attribute_calculators.ac(record_dict["data"])
-        if not check_data_type(attr_value):
-            raise ValueError(
-                f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
-                f"but data_type {data_type} requires "
-                f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
+    async def process_llm_record_batch(record_dict_batch: list):
+        """Process a batch of record_dicts, writes results into shared var calculated_attribute_by_record_id."""
+
+        for record_dict in record_dict_batch:
+            attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
+                DEFAULT_USER_PROMPT_A2VYBG, record_dict
             )
-        calculated_attribute_by_record_id[record_dict["id"]] = attr_value
-    __print_progress(1.0)
-    print("Finished execution.")
-    requests.put(payload_url, json=calculated_attribute_by_record_id)
+
+            attr_value: str = await attribute_calculators.ac(record_dict["data"])
+
+            if not check_data_type(attr_value):
+                raise ValueError(
+                    f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
+                    f"but data_type {data_type} requires "
+                    f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
+                )
+            calculated_attribute_by_record_id[record_dict["id"]] = attr_value
+
+    async def process_async_llm_calls(record_dict_list):
+        batch_size = len(record_dict_list) // int(attribute_calculators.NUM_WORKERS)
+        record_dict_batches = [
+            record_dict_list[i : i + batch_size]
+            for i in range(0, len(record_dict_list), batch_size)
+        ]
+        tasks = [process_llm_record_batch(batch) for batch in record_dict_batches]
+        await asyncio.gather(*tasks)
+
+    if data_type == "LLM_RESPONSE":
+        asyncio.run(process_async_llm_calls(record_dict_list))
+        requests.put(payload_url, json=calculated_attribute_by_record_id)
+        __print_progress(1.0)
+        print("Finished execution.")
+    else:
+        for record_dict in record_dict_list:
+            idx += 1
+            if idx % progress_size == 0:
+                progress = round(idx / amount, 2)
+                __print_progress(progress)
+            attr_value = attribute_calculators.ac(record_dict["data"])
+            if not check_data_type(attr_value):
+                raise ValueError(
+                    f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
+                    f"but data_type {data_type} requires "
+                    f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
+                )
+            calculated_attribute_by_record_id[record_dict["id"]] = attr_value
+        __print_progress(1.0)
+        print("Finished execution.")
+        requests.put(payload_url, json=calculated_attribute_by_record_id)
