@@ -147,7 +147,7 @@ async def process_llm_record_batch(record_dict_batch: List[Dict[str, Any]]) -> N
 
         if record_dict["id"] in cached_records:
             print(
-                "Using cached value for record",
+                "Using cached value for record with record_id",
                 record_dict["data"]["running_id"],
                 flush=True,
             )
