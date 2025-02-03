@@ -4,8 +4,9 @@ import json
 import requests
 import spacy
 import sys
-from mustache import prepare_and_render_mustache
 from spacy.tokens import DocBin
+from hashlib import md5
+from mustache import prepare_and_render_mustache
 
 
 def get_check_data_type_function(data_type: str) -> Tuple[List[Type], Callable]:
@@ -108,7 +109,9 @@ def parse_data_to_record_dict(
 
 
 def save_ac_value(record_id: str, attr_value: Any) -> None:
-    global calculated_attribute_by_record_id, processed_records, progress_size, amount, check_data_type, py_data_types
+    global calculated_attribute_by_record_id, processed_records, progress_size, amount
+    global check_data_type, py_data_types, llm_ac_cache, llm_config_hash, cached_records
+    global CACHE_FILE_UPLOAD_LINK_A2VYBG
 
     if not check_data_type(attr_value):
         raise ValueError(
@@ -118,6 +121,10 @@ def save_ac_value(record_id: str, attr_value: Any) -> None:
         )
 
     calculated_attribute_by_record_id[record_id] = attr_value
+
+    if data_type == "LLM_RESPONSE":
+        llm_ac_cache[llm_config_hash] = cached_records
+        requests.put(CACHE_FILE_UPLOAD_LINK_A2VYBG, json=llm_ac_cache)
 
     processed_records = processed_records + 1
     if processed_records % progress_size == 0:
@@ -131,14 +138,23 @@ def process_attribute_calculation(record_dict_list: List[Dict[str, Any]]) -> Non
 
 
 async def process_llm_record_batch(record_dict_batch: List[Dict[str, Any]]) -> None:
-    global DEFAULT_USER_PROMPT_A2VYBG
+    global DEFAULT_USER_PROMPT_A2VYBG, cached_records
 
     for record_dict in record_dict_batch:
         attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
             DEFAULT_USER_PROMPT_A2VYBG, record_dict
         )
 
-        attr_value: str = await attribute_calculators.ac(record_dict["data"])
+        if record_dict["id"] in cached_records:
+            print(
+                "Using cached value for record",
+                record_dict["data"]["running_id"],
+                flush=True,
+            )
+            attr_value: str = cached_records[record_dict["id"]]
+        else:
+            attr_value: str = await attribute_calculators.ac(record_dict["data"])
+            cached_records[record_dict["id"]] = attr_value
         save_ac_value(record_dict["id"], attr_value)
 
 
@@ -169,8 +185,16 @@ if __name__ == "__main__":
     # the script `labeling_functions` does not exist. It will be inserted at runtime
     import attribute_calculators
 
+    # exists for both LLM playground and (run-on-10, run-all)
     DEFAULT_USER_PROMPT_A2VYBG = getattr(
         attribute_calculators, "USER_PROMPT_A2VYBG", None
+    )
+    # exists only for (run-on-10, run-all)
+    CACHE_ACCESS_LINK_A2VYBG = getattr(
+        attribute_calculators, "CACHE_ACCESS_LINK_A2VYBG", ""
+    )
+    CACHE_FILE_UPLOAD_LINK_A2VYBG = getattr(
+        attribute_calculators, "CACHE_FILE_UPLOAD_LINK_A2VYBG", ""
     )
 
     vocab = spacy.blank(iso2_code).vocab
@@ -193,6 +217,11 @@ if __name__ == "__main__":
     __print_progress(0.0)
 
     if data_type == "LLM_RESPONSE":
+        llm_config = attribute_calculators.get_llm_config()
+        llm_ac_cache = requests.get(CACHE_ACCESS_LINK_A2VYBG).json()
+        llm_config_hash = md5(json.dumps(llm_config).encode()).hexdigest()
+
+        cached_records = llm_ac_cache.get(llm_config_hash, {})
         asyncio.run(process_async_llm_calls(record_dict_list))
     else:
         process_attribute_calculation(record_dict_list)
