@@ -122,7 +122,7 @@ def save_ac_value(record_id: str, attr_value: Any) -> None:
 
     calculated_attribute_by_record_id[record_id] = attr_value
 
-    if data_type == "LLM_RESPONSE":
+    if data_type == "LLM_RESPONSE" and "http" in CACHE_FILE_UPLOAD_LINK_A2VYBG:
         llm_ac_cache[llm_config_hash] = cached_records
         requests.put(CACHE_FILE_UPLOAD_LINK_A2VYBG, json=llm_ac_cache)
 
@@ -218,7 +218,10 @@ if __name__ == "__main__":
 
     if data_type == "LLM_RESPONSE":
         llm_config = attribute_calculators.get_llm_config()
-        llm_ac_cache = requests.get(CACHE_ACCESS_LINK_A2VYBG).json()
+        if "http" in CACHE_ACCESS_LINK_A2VYBG:
+            llm_ac_cache = requests.get(CACHE_ACCESS_LINK_A2VYBG).json()
+        else:
+            llm_ac_cache = {}
         llm_config_hash = md5(json.dumps(llm_config).encode()).hexdigest()
 
         cached_records = llm_ac_cache.get(llm_config_hash, {})
