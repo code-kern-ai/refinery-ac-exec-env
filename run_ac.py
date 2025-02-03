@@ -124,6 +124,7 @@ def save_ac_value(record_id: str, attr_value: Any) -> None:
 
     if data_type == "LLM_RESPONSE" and "http" in CACHE_FILE_UPLOAD_LINK_A2VYBG:
         llm_ac_cache[llm_config_hash] = cached_records
+        # TODO only save cache every few records to avoid request spamming
         requests.put(CACHE_FILE_UPLOAD_LINK_A2VYBG, json=llm_ac_cache)
 
     processed_records = processed_records + 1
@@ -145,16 +146,10 @@ async def process_llm_record_batch(record_dict_batch: List[Dict[str, Any]]) -> N
             DEFAULT_USER_PROMPT_A2VYBG, record_dict
         )
 
-        if record_dict["id"] in cached_records:
-            print(
-                "Using cached value for record with record_id",
-                record_dict["data"]["running_id"],
-                flush=True,
-            )
-            attr_value: str = cached_records[record_dict["id"]]
-        else:
-            attr_value: str = await attribute_calculators.ac(record_dict["data"])
-            cached_records[record_dict["id"]] = attr_value
+        attr_value: str = await attribute_calculators.ac(
+            record_dict["data"], cached_records
+        )
+
         save_ac_value(record_dict["id"], attr_value)
 
 
