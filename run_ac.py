@@ -73,12 +73,12 @@ def __check_data_type_embedding_list(attr_value: Any) -> bool:
     return True
 
 
-def __print_progress(progress: float) -> None:
+def __print_progress_a2vybg(progress: float) -> None:
     print(f"progress: {progress}", flush=True)
 
 
-def load_data_dict(record: Dict[str, Any]) -> Dict[str, Any]:
-    global vocab
+def load_data_dict_a2vybg(record: Dict[str, Any]) -> Dict[str, Any]:
+    global vocab_a2vybg
 
     if record["bytes"][:2] == "\\x":
         record["bytes"] = record["bytes"][2:]
@@ -87,7 +87,7 @@ def load_data_dict(record: Dict[str, Any]) -> Dict[str, Any]:
 
     byte = bytes.fromhex(record["bytes"])
     doc_bin_loaded = DocBin().from_bytes(byte)
-    docs = list(doc_bin_loaded.get_docs(vocab))
+    docs = list(doc_bin_loaded.get_docs(vocab_a2vybg))
     data_dict = {}
     for col, doc in zip(record["columns"], docs):
         data_dict[col] = doc
@@ -99,62 +99,86 @@ def load_data_dict(record: Dict[str, Any]) -> Dict[str, Any]:
     return data_dict
 
 
-def parse_data_to_record_dict(
+def parse_data_to_record_dict_a2vybg(
     record_chunk: List[Dict[str, Any]]
 ) -> List[Dict[str, Any]]:
     result = []
     for r in record_chunk:
-        result.append({"id": r["record_id"], "data": load_data_dict(r)})
+        result.append({"id": r["record_id"], "data": load_data_dict_a2vybg(r)})
     return result
 
 
-def save_ac_value(record_id: str, attr_value: Any) -> None:
-    global calculated_attribute_by_record_id, processed_records, progress_size, amount
-    global check_data_type, py_data_types, llm_ac_cache, llm_config_hash, cached_records
+def send_cache_to_object_storage_a2vybg():
+    global llm_ac_cache_a2vybg, llm_config_hash_a2vybg, cached_records_a2vybg
+
+    if data_type == "LLM_RESPONSE" and "http" in CACHE_FILE_UPLOAD_LINK_A2VYBG:
+        llm_ac_cache_a2vybg[llm_config_hash_a2vybg] = cached_records_a2vybg
+        requests.put(CACHE_FILE_UPLOAD_LINK_A2VYBG, json=llm_ac_cache_a2vybg)
+
+
+def save_ac_value_a2vybg(record_id: str, attr_value: Any) -> None:
+    global calculated_attribute_by_record_id_a2vybg, processed_records_a2vybg, progress_size_a2vybg, amount_a2vybg
+    global check_data_type_a2vybg, py_data_types_a2vybg, llm_ac_cache_a2vybg, llm_config_hash_a2vybg, cached_records_a2vybg
     global CACHE_FILE_UPLOAD_LINK_A2VYBG
 
-    if not check_data_type(attr_value):
+    if not check_data_type_a2vybg(attr_value):
         raise ValueError(
             f"Attribute value `{attr_value}` is of type {type(attr_value)}, "
             f"but data_type {data_type} requires "
-            f"{str(py_data_types) if len(py_data_types) > 1 else str(py_data_types[0])}."
+            f"{str(py_data_types_a2vybg) if len(py_data_types_a2vybg) > 1 else str(py_data_types_a2vybg[0])}."
         )
 
-    calculated_attribute_by_record_id[record_id] = attr_value
+    calculated_attribute_by_record_id_a2vybg[record_id] = attr_value
 
-    if data_type == "LLM_RESPONSE" and "http" in CACHE_FILE_UPLOAD_LINK_A2VYBG:
-        llm_ac_cache[llm_config_hash] = cached_records
-        # TODO only save cache every few records to avoid request spamming
-        requests.put(CACHE_FILE_UPLOAD_LINK_A2VYBG, json=llm_ac_cache)
-
-    processed_records = processed_records + 1
-    if processed_records % progress_size == 0:
-        __print_progress(round(processed_records / amount, 2))
+    processed_records_a2vybg = processed_records_a2vybg + 1
+    if processed_records_a2vybg % progress_size_a2vybg == 0:
+        __print_progress_a2vybg(round(processed_records_a2vybg / amount_a2vybg, 2))
+    if data_type == "LLM_RESPONSE" and processed_records_a2vybg % 250 == 0:
+        send_cache_to_object_storage_a2vybg()
 
 
-def process_attribute_calculation(record_dict_list: List[Dict[str, Any]]) -> None:
+def process_attribute_calculation_a2vybg(
+    record_dict_list: List[Dict[str, Any]]
+) -> None:
     for record_dict in record_dict_list:
         attr_value: Any = attribute_calculators.ac(record_dict["data"])
-        save_ac_value(record_dict["id"], attr_value)
+        save_ac_value_a2vybg(record_dict["id"], attr_value)
 
 
-async def process_llm_record_batch(record_dict_batch: List[Dict[str, Any]]) -> None:
-    global DEFAULT_USER_PROMPT_A2VYBG, cached_records
+def check_abort_status_a2vybg() -> bool:
+    # function outside the async loop for reading always the freshest value
+    global should_abort_a2vybg
+    return should_abort_a2vybg
+
+
+async def process_llm_record_batch_a2vybg(
+    record_dict_batch: List[Dict[str, Any]]
+) -> None:
+    global DEFAULT_USER_PROMPT_A2VYBG, cached_records_a2vybg
 
     for record_dict in record_dict_batch:
-        attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
-            DEFAULT_USER_PROMPT_A2VYBG, record_dict
-        )
+        if check_abort_status_a2vybg():
+            return
+        try:
+            attribute_calculators.USER_PROMPT_A2VYBG = prepare_and_render_mustache(
+                DEFAULT_USER_PROMPT_A2VYBG, record_dict
+            )
+            attr_value: str = await attribute_calculators.ac(
+                record_dict["data"], cached_records_a2vybg
+            )
 
-        attr_value: str = await attribute_calculators.ac(
-            record_dict["data"], cached_records
-        )
+            save_ac_value_a2vybg(record_dict["id"], attr_value)
+        except Exception as e:
+            global should_abort_a2vybg
+            should_abort_a2vybg = True
+            print(f"Error in record {record_dict['data']['running_id']}: {str(e)}")
+            return
 
-        save_ac_value(record_dict["id"], attr_value)
 
-
-async def process_async_llm_calls(record_dict_list: List[Dict[str, Any]]) -> None:
-    global amount
+async def process_async_llm_calls_a2vybg(
+    record_dict_list: List[Dict[str, Any]]
+) -> None:
+    global amount_a2vybg
 
     def make_batches(
         iterable: List[Any], size: int = 1
@@ -163,12 +187,15 @@ async def process_async_llm_calls(record_dict_list: List[Dict[str, Any]]) -> Non
         for ndx in range(0, length, size):
             yield iterable[ndx : min(ndx + size, length)]
 
-    batch_size = max(amount // int(attribute_calculators.NUM_WORKERS_A2VYBG), 1)
+    batch_size = max(amount_a2vybg // int(attribute_calculators.NUM_WORKERS_A2VYBG), 1)
     tasks = [
-        process_llm_record_batch(batch)
+        process_llm_record_batch_a2vybg(batch)
         for batch in make_batches(record_dict_list, size=batch_size)
     ]
     await asyncio.gather(*tasks)
+    send_cache_to_object_storage_a2vybg()
+    if check_abort_status_a2vybg():
+        raise ValueError("Encountered error during LLM processing.")
 
 
 if __name__ == "__main__":
@@ -192,38 +219,46 @@ if __name__ == "__main__":
         attribute_calculators, "CACHE_FILE_UPLOAD_LINK_A2VYBG", ""
     )
 
-    vocab = spacy.blank(iso2_code).vocab
+    vocab_a2vybg = spacy.blank(iso2_code).vocab
+
+    should_abort_a2vybg = False
 
     with open("docbin_full.json", "r") as infile:
         docbin_data = json.load(infile)
 
-    record_dict_list = parse_data_to_record_dict(docbin_data)
+    record_dict_list = parse_data_to_record_dict_a2vybg(docbin_data)
 
-    py_data_types, check_data_type = get_check_data_type_function(data_type)
+    py_data_types_a2vybg, check_data_type_a2vybg = get_check_data_type_function(
+        data_type
+    )
 
     print("Running attribute calculation.")
-    calculated_attribute_by_record_id = {}
-    amount = len(record_dict_list)
-    progress_size = min(
+    calculated_attribute_by_record_id_a2vybg = {}
+    amount_a2vybg = len(record_dict_list)
+    progress_size_a2vybg = min(
         100,
-        max(amount // int(getattr(attribute_calculators, "NUM_WORKERS_A2VYBG", 1)), 1),
+        max(
+            amount_a2vybg
+            // int(getattr(attribute_calculators, "NUM_WORKERS_A2VYBG", 1)),
+            1,
+        ),
     )
-    processed_records = 0
-    __print_progress(0.0)
+    processed_records_a2vybg = 0
+    __print_progress_a2vybg(0.0)
 
     if data_type == "LLM_RESPONSE":
-        llm_config = attribute_calculators.get_llm_config()
+        llm_config = attribute_calculators.get_llm_config_a2vybg()
         if "http" in CACHE_ACCESS_LINK_A2VYBG:
-            llm_ac_cache = requests.get(CACHE_ACCESS_LINK_A2VYBG).json()
+            llm_ac_cache_a2vybg = requests.get(CACHE_ACCESS_LINK_A2VYBG).json()
         else:
-            llm_ac_cache = {}
-        llm_config_hash = md5(json.dumps(llm_config).encode()).hexdigest()
+            llm_ac_cache_a2vybg = {}
+        llm_config_hash_a2vybg = md5(json.dumps(llm_config).encode()).hexdigest()
 
-        cached_records = llm_ac_cache.get(llm_config_hash, {})
-        asyncio.run(process_async_llm_calls(record_dict_list))
+        cached_records_a2vybg = llm_ac_cache_a2vybg.get(llm_config_hash_a2vybg, {})
+        asyncio.run(process_async_llm_calls_a2vybg(record_dict_list))
     else:
-        process_attribute_calculation(record_dict_list)
+        process_attribute_calculation_a2vybg(record_dict_list)
 
-    __print_progress(1.0)
+    __print_progress_a2vybg(1.0)
     print("Finished execution.")
-    requests.put(payload_url, json=calculated_attribute_by_record_id)
+    requests.put(payload_url, json=calculated_attribute_by_record_id_a2vybg)
