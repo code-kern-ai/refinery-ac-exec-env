@@ -180,16 +180,15 @@ def make_batches(
 async def process_async_llm_calls_a2vybg(
     record_dict_list: List[Dict[str, Any]]
 ) -> None:
-
     batch_size = max(amount_a2vybg // int(attribute_calculators.NUM_WORKERS_A2VYBG), 1)
     tasks = [
         process_llm_record_batch_a2vybg(batch)
         for batch in make_batches(record_dict_list, size=batch_size)
     ]
     await asyncio.gather(*tasks)
+    send_cache_to_object_storage_a2vybg()
     if check_abort_status_a2vybg():
         raise ValueError("Encountered error during LLM processing.")
-    send_cache_to_object_storage_a2vybg()
 
 
 if __name__ == "__main__":
