@@ -78,8 +78,6 @@ def __print_progress_a2vybg(progress: float) -> None:
 
 
 def load_data_dict_a2vybg(record: Dict[str, Any]) -> Dict[str, Any]:
-    global vocab_a2vybg
-
     if record["bytes"][:2] == "\\x":
         record["bytes"] = record["bytes"][2:]
     else:
@@ -109,7 +107,7 @@ def parse_data_to_record_dict_a2vybg(
 
 
 def send_cache_to_object_storage_a2vybg():
-    global llm_ac_cache_a2vybg, llm_config_hash_a2vybg, cached_records_a2vybg
+    global llm_ac_cache_a2vybg
 
     if data_type == "LLM_RESPONSE" and "http" in CACHE_FILE_UPLOAD_LINK_A2VYBG:
         llm_ac_cache_a2vybg[llm_config_hash_a2vybg] = cached_records_a2vybg
@@ -117,9 +115,7 @@ def send_cache_to_object_storage_a2vybg():
 
 
 def save_ac_value_a2vybg(record_id: str, attr_value: Any) -> None:
-    global calculated_attribute_by_record_id_a2vybg, processed_records_a2vybg, progress_size_a2vybg, amount_a2vybg
-    global check_data_type_a2vybg, py_data_types_a2vybg, llm_ac_cache_a2vybg, llm_config_hash_a2vybg, cached_records_a2vybg
-    global CACHE_FILE_UPLOAD_LINK_A2VYBG
+    global processed_records_a2vybg
 
     if not check_data_type_a2vybg(attr_value):
         raise ValueError(
@@ -147,14 +143,13 @@ def process_attribute_calculation_a2vybg(
 
 def check_abort_status_a2vybg() -> bool:
     # function outside the async loop for reading always the freshest value
-    global should_abort_a2vybg
     return should_abort_a2vybg
 
 
 async def process_llm_record_batch_a2vybg(
     record_dict_batch: List[Dict[str, Any]]
 ) -> None:
-    global DEFAULT_USER_PROMPT_A2VYBG, cached_records_a2vybg
+    global should_abort_a2vybg
 
     for record_dict in record_dict_batch:
         if check_abort_status_a2vybg():
@@ -169,23 +164,22 @@ async def process_llm_record_batch_a2vybg(
 
             save_ac_value_a2vybg(record_dict["id"], attr_value)
         except Exception as e:
-            global should_abort_a2vybg
             should_abort_a2vybg = True
             print(f"Error in record {record_dict['data']['running_id']}: {str(e)}")
             return
 
 
+def make_batches(
+    iterable: List[Any], size: int = 1
+) -> Generator[List[Any], None, None]:
+    length = len(iterable)
+    for ndx in range(0, length, size):
+        yield iterable[ndx : min(ndx + size, length)]
+
+
 async def process_async_llm_calls_a2vybg(
     record_dict_list: List[Dict[str, Any]]
 ) -> None:
-    global amount_a2vybg
-
-    def make_batches(
-        iterable: List[Any], size: int = 1
-    ) -> Generator[List[Any], None, None]:
-        length = len(iterable)
-        for ndx in range(0, length, size):
-            yield iterable[ndx : min(ndx + size, length)]
 
     batch_size = max(amount_a2vybg // int(attribute_calculators.NUM_WORKERS_A2VYBG), 1)
     tasks = [
@@ -193,9 +187,9 @@ async def process_async_llm_calls_a2vybg(
         for batch in make_batches(record_dict_list, size=batch_size)
     ]
     await asyncio.gather(*tasks)
-    send_cache_to_object_storage_a2vybg()
     if check_abort_status_a2vybg():
         raise ValueError("Encountered error during LLM processing.")
+    send_cache_to_object_storage_a2vybg()
 
 
 if __name__ == "__main__":
