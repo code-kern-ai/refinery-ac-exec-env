@@ -30,6 +30,10 @@ attrs==24.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
+azure-ai-inference==1.0.0b8
+    # via -r requirements/requirements.in
+azure-core==1.32.0
+    # via azure-ai-inference
 beautifulsoup4==4.11.1
     # via -r requirements/exec-env-requirements.txt
 better-profanity==0.7.0
@@ -126,6 +130,8 @@ fuzzywuzzy==0.18.0
     # via -r requirements/exec-env-requirements.txt
 google-search-results==2.4.1
     # via -r requirements/exec-env-requirements.txt
+greenlet==3.1.1
+    # via sqlalchemy
 groq==0.4.2
     # via -r requirements/exec-env-requirements.txt
 h11==0.14.0
@@ -162,6 +168,8 @@ inflect==7.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
+isodate==0.7.2
+    # via azure-ai-inference
 jellyfish==1.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -347,6 +355,7 @@ regex==2024.11.6
 requests==2.31.0
     # via
     #   -r requirements/exec-env-requirements.txt
+    #   azure-core
     #   google-search-results
     #   lexmo
     #   spacy
@@ -372,6 +381,7 @@ scipy==1.13.1
 six==1.16.0
     # via
     #   -r requirements/exec-env-requirements.txt
+    #   azure-core
     #   langdetect
     #   python-dateutil
 smart-open==6.4.0
@@ -469,6 +479,8 @@ typing-extensions==4.12.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
+    #   azure-ai-inference
+    #   azure-core
     #   cloudpathlib
     #   groq
     #   multidict
