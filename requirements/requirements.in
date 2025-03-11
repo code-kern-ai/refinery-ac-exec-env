@@ -3,3 +3,4 @@ pydantic==2.7.4
 spacy[ja]==3.7.5
 chevron==0.14.0
 openai==1.59.7
+azure-ai-inference==1.0.0b8
