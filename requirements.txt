@@ -4,19 +4,19 @@
 #
 #    pip-compile --output-file=requirements.txt --strip-extras requirements/requirements.in
 #
-aiohappyeyeballs==2.4.3
+aiohappyeyeballs==2.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
-aiohttp==3.11.7
+aiohttp==3.11.13
     # via -r requirements/exec-env-requirements.txt
-aiosignal==1.3.1
+aiosignal==1.3.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
 annotated-types==0.7.0
     # via pydantic
-anyio==4.6.2.post1
+anyio==4.8.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
@@ -26,7 +26,7 @@ async-timeout==5.0.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
-attrs==24.2.0
+attrs==25.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
@@ -46,7 +46,7 @@ breadability==0.1.20
     # via
     #   -r requirements/exec-env-requirements.txt
     #   sumy
-cachetools==5.5.0
+cachetools==5.5.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -57,7 +57,7 @@ catalogue==2.0.10
     #   srsly
     #   textacy
     #   thinc
-certifi==2024.8.30
+certifi==2025.1.31
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpcore
@@ -67,13 +67,13 @@ chardet==5.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
 chevron==0.14.0
     # via -r requirements/requirements.in
-click==8.1.7
+click==8.1.8
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
@@ -90,13 +90,13 @@ convertdate==2.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   holidays
-cymem==2.0.10
+cymem==2.0.11
     # via
     #   -r requirements/exec-env-requirements.txt
     #   preshed
     #   spacy
     #   thinc
-cytoolz==1.0.0
+cytoolz==1.0.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -130,8 +130,6 @@ fuzzywuzzy==0.18.0
     # via -r requirements/exec-env-requirements.txt
 google-search-results==2.4.1
     # via -r requirements/exec-env-requirements.txt
-greenlet==3.1.1
-    # via sqlalchemy
 groq==0.4.2
     # via -r requirements/exec-env-requirements.txt
 h11==0.14.0
@@ -148,7 +146,7 @@ httpcore==1.0.7
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpx
-httpx==0.27.2
+httpx==0.28.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
@@ -160,21 +158,21 @@ idna==3.10
     #   httpx
     #   requests
     #   yarl
-importlib-metadata==8.5.0
+importlib-metadata==8.6.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   typeguard
-inflect==7.4.0
+inflect==7.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
 isodate==0.7.2
     # via azure-ai-inference
-jellyfish==1.1.0
+jellyfish==1.1.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
-jinja2==3.1.4
+jinja2==3.1.6
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -213,7 +211,7 @@ libretranslatepy==2.1.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   translate
-lxml==5.3.0
+lxml==5.3.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
@@ -226,7 +224,7 @@ markupsafe==3.0.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   jinja2
-more-itertools==10.5.0
+more-itertools==10.6.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
@@ -235,7 +233,7 @@ multidict==6.1.0
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
     #   yarl
-murmurhash==1.0.11
+murmurhash==1.0.12
     # via
     #   -r requirements/exec-env-requirements.txt
     #   preshed
@@ -251,7 +249,7 @@ nltk==3.8.1
     #   lexmo
     #   sumy
     #   textblob
-num2words==0.5.13
+num2words==0.5.14
     # via
     #   -r requirements/exec-env-requirements.txt
     #   quantulum3
@@ -292,12 +290,12 @@ preshed==3.0.9
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-propcache==0.2.0
+propcache==0.3.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
     #   yarl
-pyaml==24.9.0
+pyaml==25.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-optimize
@@ -321,7 +319,7 @@ pymeeus==0.5.12
     #   -r requirements/exec-env-requirements.txt
     #   convertdate
     #   holidays
-pyphen==0.17.0
+pyphen==0.17.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -333,7 +331,7 @@ python-dateutil==2.9.0.post0
     #   pandas
 python-levenshtein==0.20.8
     # via -r requirements/exec-env-requirements.txt
-pytz==2024.2
+pytz==2025.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
@@ -378,7 +376,7 @@ scipy==1.13.1
     #   scikit-learn
     #   scikit-optimize
     #   textacy
-six==1.16.0
+six==1.17.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   azure-core
@@ -394,7 +392,6 @@ sniffio==1.3.1
     #   -r requirements/exec-env-requirements.txt
     #   anyio
     #   groq
-    #   httpx
     #   openai
 soupsieve==2.6
     # via
@@ -412,11 +409,11 @@ spacy-loggers==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sqlalchemy==2.0.36
+sqlalchemy==2.0.38
     # via
     #   -r requirements/exec-env-requirements.txt
     #   knowledge
-srsly==2.4.8
+srsly==2.5.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   confection
@@ -425,11 +422,11 @@ srsly==2.4.8
     #   weasel
 stemming==1.0.1
     # via -r requirements/exec-env-requirements.txt
-sudachidict-core==20241021
+sudachidict-core==20250129
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sudachipy==0.6.8
+sudachipy==0.6.10
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -465,7 +462,7 @@ tqdm==4.67.1
     #   textacy
 translate==3.6.1
     # via -r requirements/exec-env-requirements.txt
-typeguard==4.4.1
+typeguard==4.4.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
@@ -489,11 +486,11 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typeguard
-tzdata==2024.2
+tzdata==2025.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
-urllib3==2.2.3
+urllib3==2.3.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
@@ -507,7 +504,7 @@ wasabi==0.10.1
     #   weasel
 weasel==0.4.1
     # via spacy
-yarl==1.18.0
+yarl==1.18.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
