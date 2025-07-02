@@ -171,7 +171,7 @@ numpy==1.23.4
     #   spacy
     #   textacy
     #   thinc
-openai==0.27.7
+# openai==0.27.7
     # via -r exec-env-requirements.in
 packaging==25.0
     # via
@@ -197,7 +197,7 @@ pyaml==25.5.0
     # via scikit-optimize
 pycountry==24.6.1
     # via sumy
-pydantic==1.10.22
+# pydantic==1.10.22
     # via
     #   confection
     #   groq
@@ -265,7 +265,7 @@ sniffio==1.3.1
     #   groq
 soupsieve==2.7
     # via beautifulsoup4
-spacy[ja]==3.4.2
+# spacy[ja]==3.4.2
     # via
     #   -r exec-env-requirements.in
     #   textacy
@@ -296,7 +296,7 @@ textblob==0.17.1
     # via -r exec-env-requirements.in
 textstat==0.7.3
     # via -r exec-env-requirements.in
-thinc==8.1.12
+thinc==8.2.5
     # via spacy
 threadpoolctl==3.6.0
     # via scikit-learn
