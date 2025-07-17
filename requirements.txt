@@ -30,7 +30,7 @@ attrs==25.3.0
     #   aiohttp
 azure-ai-inference==1.0.0b8
     # via -r requirements/requirements.in
-azure-core==1.32.0
+azure-core==1.35.0
     # via azure-ai-inference
 beautifulsoup4==4.11.1
     # via -r /home/runner/work/refinery-submodule-parent-images/refinery-submodule-parent-images/refinery-ac-exec-env/requirements/exec-env-requirements.txt
@@ -170,7 +170,7 @@ jinja2==3.1.6
     # via
     #   -r /home/runner/work/refinery-submodule-parent-images/refinery-submodule-parent-images/refinery-ac-exec-env/requirements/exec-env-requirements.txt
     #   spacy
-jiter==0.8.2
+jiter==0.10.0
     # via openai
 joblib==1.5.1
     # via
