@@ -1,4 +1,4 @@
-FROM kernai/refinery-parent-images:parent-image-updates-image-updates-exec-env
+FROM kernai/refinery-parent-images:parent-image-updates-exec-env
 
 COPY requirements.txt .
 
