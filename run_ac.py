@@ -89,15 +89,17 @@ def __print_progress_a2vybg(progress: float) -> None:
 
 
 def load_data_dict_a2vybg(record: Dict[str, Any]) -> Dict[str, Any]:
+    data_dict = {}
     if record["bytes"][:2] == "\\x":
         record["bytes"] = record["bytes"][2:]
+        byte = bytes.fromhex(record["bytes"])
+        doc_bin_loaded = DocBin().from_bytes(byte)
+        docs = list(doc_bin_loaded.get_docs(vocab_a2vybg))
+    elif record["bytes"] == "":
+        docs = [record[col] for col in record["columns"]]
     else:
         raise ValueError("Unknown byte format in DocBin. Please contact the support.")
 
-    byte = bytes.fromhex(record["bytes"])
-    doc_bin_loaded = DocBin().from_bytes(byte)
-    docs = list(doc_bin_loaded.get_docs(vocab_a2vybg))
-    data_dict = {}
     for col, doc in zip(record["columns"], docs):
         data_dict[col] = doc
 
