@@ -1,0 +1,68 @@
+---
+description: Core coding guidelines and best practices for refinery-ac-exec-env
+alwaysApply: true
+---
+
+# Core Coding Guidelines
+
+## Project Overview
+
+This is a containerized execution environment for attribute calculation in refinery. The codebase processes data records, performs attribute calculations (including LLM-based processing), and manages caching and progress reporting.
+
+## General Principles
+
+### Code Quality
+- **Readability over cleverness**: Code is read far more often than written
+- **Explicit over implicit**: Make intentions clear through naming and structure
+- **Fail fast**: Validate inputs early and raise clear errors
+- **Single responsibility**: Functions should do one thing well
+
+### Error Handling
+- Use specific exception types, not bare `except Exception`
+- Preserve traceback information when re-raising exceptions
+- Provide clear, actionable error messages with context
+- Log errors with appropriate severity levels (use logging module, not print)
+
+### Naming Conventions
+- Functions and variables: `snake_case`
+- Constants: `UPPER_SNAKE_CASE`
+- Classes: `PascalCase`
+- Private functions: Prefix with `__` (double underscore) only when truly private
+- Avoid magic suffixes like `_a2vybg` in new code - use descriptive names
+
+### Type Hints
+- Use type hints for all function signatures
+- Prefer modern Python 3.10+ syntax:
+  - `str | None` instead of `Optional[str]`
+  - `list[str]` instead of `List[str]`
+  - `dict[str, int]` instead of `Dict[str, int]`
+- Use `Any` sparingly - prefer specific types or protocols
+- Use `object` instead of `Any` when accepting any object
+
+### Global Variables
+- **Avoid global variables** when possible
+- If globals are necessary (e.g., runtime configuration), document why
+- Consider using a configuration class or dataclass instead
+- Group related globals into a single namespace object
+
+### Progress Reporting
+- Use logging module instead of print statements
+- Log to stdout/stderr for container compatibility
+- Include structured information (record IDs, progress percentages)
+- Use appropriate log levels: DEBUG, INFO, WARNING, ERROR
+
+### Magic Numbers and Strings
+- Extract magic numbers to named constants
+- Use enums or constants for string literals that represent states/types
+- Document the meaning of non-obvious values
+
+### Function Length
+- Keep functions focused and under 50 lines when possible
+- Extract complex logic into helper functions
+- Use descriptive function names that explain purpose
+
+### Comments
+- Write self-documenting code first
+- Add comments for "why", not "what"
+- Document complex algorithms or business logic
+- Keep comments up-to-date with code changes

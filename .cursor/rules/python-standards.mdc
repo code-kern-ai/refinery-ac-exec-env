@@ -1,0 +1,241 @@
+---
+description: Python coding standards and type hint conventions
+globs: **/*.py
+alwaysApply: false
+---
+
+# Python Coding Standards
+
+## Type Hints
+
+### Modern Syntax (Python 3.10+)
+```python
+# ✅ GOOD - Use modern syntax
+def process_records(records: list[dict[str, Any]]) -> dict[str, str]:
+    pass
+
+def get_value(key: str) -> str | None:
+    pass
+
+# ❌ BAD - Avoid old typing module syntax
+from typing import List, Dict, Optional
+def process_records(records: List[Dict[str, Any]]) -> Dict[str, str]:
+    pass
+
+def get_value(key: str) -> Optional[str]:
+    pass
+```
+
+### Type Aliases
+```python
+# ✅ GOOD - Use TypeAlias for complex types
+from typing import TypeAlias
+
+RecordDict: TypeAlias = dict[str, Any]
+RecordList: TypeAlias = list[RecordDict]
+
+# ❌ BAD - Simple assignment
+RecordDict = dict[str, Any]
+```
+
+### Protocols and Abstract Types
+```python
+# ✅ GOOD - Use protocols for flexible interfaces
+from typing import Protocol
+
+class DataProcessor(Protocol):
+    def process(self, data: dict[str, Any]) -> Any: ...
+
+def run_processor(processor: DataProcessor, data: dict[str, Any]) -> Any:
+    return processor.process(data)
+
+# ✅ GOOD - Use abstract types for function parameters
+from collections.abc import Mapping, Sequence
+
+def process_mapping(data: Mapping[str, Any]) -> None:
+    pass  # Accepts dict, OrderedDict, etc.
+```
+
+## Error Handling
+
+### Specific Exceptions
+```python
+# ✅ GOOD - Catch specific exceptions
+try:
+    value = int(user_input)
+except ValueError as e:
+    logger.error(f"Invalid integer input: {user_input}", exc_info=True)
+    raise
+
+# ❌ BAD - Bare except or catching Exception
+try:
+    value = int(user_input)
+except Exception:  # Too broad
+    pass
+```
+
+### Preserve Tracebacks
+```python
+# ✅ GOOD - Preserve original exception context
+try:
+    result = await process_llm_call(data)
+except LLMError as e:
+    logger.error(f"LLM processing failed for record {record_id}", exc_info=True)
+    raise ProcessingError(f"Failed to process record {record_id}") from e
+
+# ❌ BAD - Lose original exception
+try:
+    result = await process_llm_call(data)
+except LLMError as e:
+    raise ProcessingError(str(e))  # Loses traceback
+```
+
+### Error Messages
+```python
+# ✅ GOOD - Clear, actionable error messages
+if not isinstance(value, int):
+    raise TypeError(
+        f"Expected int, got {type(value).__name__} for attribute '{attr_name}'. "
+        f"Value: {value}"
+    )
+
+# ❌ BAD - Vague error messages
+if not isinstance(value, int):
+    raise TypeError("Invalid type")
+```
+
+## Logging
+
+### Use Logging Module
+```python
+# ✅ GOOD - Use logging module
+import logging
+
+logger = logging.getLogger(__name__)
+
+def process_record(record: dict[str, Any]) -> None:
+    logger.info(f"Processing record {record['id']}")
+    try:
+        result = calculate_attribute(record)
+        logger.debug(f"Attribute calculated: {result}")
+    except Exception as e:
+        logger.error(f"Failed to process record {record['id']}", exc_info=True)
+        raise
+
+# ❌ BAD - Using print statements
+def process_record(record: dict[str, Any]) -> None:
+    print(f"Processing record {record['id']}")  # Not suitable for production
+```
+
+### Log Levels
+- **DEBUG**: Detailed diagnostic information
+- **INFO**: General informational messages (e.g., progress updates)
+- **WARNING**: Warning messages for unexpected but recoverable situations
+- **ERROR**: Error messages for failures that don't stop execution
+- **CRITICAL**: Critical errors that may cause the program to stop
+
+## Constants and Configuration
+
+### Constants
+```python
+# ✅ GOOD - Named constants
+CACHE_UPLOAD_INTERVAL = 250
+PROGRESS_REPORT_INTERVAL = 100
+DEFAULT_BATCH_SIZE = 1
+
+def save_value(record_id: str, value: Any) -> None:
+    if processed_count % CACHE_UPLOAD_INTERVAL == 0:
+        upload_cache()
+
+# ❌ BAD - Magic numbers
+def save_value(record_id: str, value: Any) -> None:
+    if processed_count % 250 == 0:  # What does 250 mean?
+        upload_cache()
+```
+
+### Data Type Constants
+```python
+# ✅ GOOD - Use constants or enums for data types
+from enum import Enum
+
+class DataType(str, Enum):
+    INTEGER = "INTEGER"
+    FLOAT = "FLOAT"
+    BOOLEAN = "BOOLEAN"
+    CATEGORY = "CATEGORY"
+    TEXT = "TEXT"
+    EMBEDDING_LIST = "EMBEDDING_LIST"
+    LLM_RESPONSE = "LLM_RESPONSE"
+    TEXT_LIST = "TEXT_LIST"
+
+def get_check_function(data_type: DataType) -> Callable:
+    if data_type == DataType.INTEGER:
+        return check_integer
+
+# ❌ BAD - String literals
+def get_check_function(data_type: str) -> Callable:
+    if data_type == "INTEGER":  # Typo-prone
+        return check_integer
+```
+
+## Function Design
+
+### Single Responsibility
+```python
+# ✅ GOOD - Focused functions
+def validate_record(record: dict[str, Any]) -> None:
+    """Validate record structure and required fields."""
+    if "id" not in record:
+        raise ValueError("Record missing 'id' field")
+    if "data" not in record:
+        raise ValueError("Record missing 'data' field")
+
+def process_record(record: dict[str, Any]) -> Any:
+    """Process a single record and return calculated attribute."""
+    validate_record(record)
+    return calculate_attribute(record["data"])
+
+# ❌ BAD - Function doing too much
+def process_record(record: dict[str, Any]) -> Any:
+    # Validation
+    if "id" not in record:
+        raise ValueError("Record missing 'id' field")
+    # Processing
+    result = calculate_attribute(record["data"])
+    # Caching
+    cache[record["id"]] = result
+    # Progress reporting
+    update_progress()
+    return result
+```
+
+### Function Length
+- Keep functions under 50 lines when possible
+- Extract complex logic into helper functions
+- Use descriptive names that explain purpose
+
+## Imports
+
+### Import Organization
+```python
+# ✅ GOOD - Organized imports
+# Standard library
+import asyncio
+import json
+import sys
+from typing import Any, Callable
+
+# Third-party
+import requests
+import spacy
+from spacy.tokens import DocBin
+
+# Local
+from mustache import prepare_and_render_mustache
+```
+
+### Import Best Practices
+- Group imports: stdlib, third-party, local
+- Use absolute imports when possible
+- Avoid wildcard imports (`from module import *`)
+- Import only what you need
