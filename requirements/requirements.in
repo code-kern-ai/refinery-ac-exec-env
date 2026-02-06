@@ -1,5 +1,6 @@
 -r exec-env-requirements.txt
-spacy[ja]==3.7.5
+azure-ai-inference==1.0.0b9
+azure-core==1.38.0 # override azure-core to 1.38.0 to fix security issues
 chevron==0.14.0
 openai==1.59.7
-azure-ai-inference==1.0.0b8
+spacy[ja]==3.7.5
