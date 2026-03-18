@@ -242,7 +242,7 @@ networkx==3.6.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
-nltk==3.9.1
+nltk==3.9.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   lexmo
