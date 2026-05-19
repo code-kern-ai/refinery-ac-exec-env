@@ -48,7 +48,7 @@ breadability==0.1.20
     # via
     #   -r requirements/exec-env-requirements.txt
     #   sumy
-cachetools==7.0.5
+cachetools==7.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -59,13 +59,13 @@ catalogue==2.0.10
     #   srsly
     #   textacy
     #   thinc
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   -r requirements/exec-env-requirements.txt
     #   httpcore
     #   httpx
     #   requests
-chardet==7.4.0.post2
+chardet==7.4.3
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
@@ -75,13 +75,13 @@ charset-normalizer==3.4.7
     #   requests
 chevron==0.14.0
     # via -r requirements/requirements.in
-click==8.3.2
+click==8.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   translate
     #   typer
-cloudpathlib==0.23.0
+cloudpathlib==0.24.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   weasel
@@ -157,7 +157,7 @@ httpx==0.28.1
     #   groq
     #   openai
     #   weasel
-idna==3.11
+idna==3.15
     # via
     #   -r requirements/exec-env-requirements.txt
     #   anyio
@@ -205,12 +205,12 @@ libretranslatepy==2.1.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   translate
-lxml==6.0.2
+lxml==6.1.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   breadability
     #   translate
-markdown-it-py==4.0.0
+markdown-it-py==4.2.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   rich
@@ -222,7 +222,7 @@ mdurl==0.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   markdown-it-py
-more-itertools==11.0.1
+more-itertools==11.0.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
@@ -265,7 +265,7 @@ numpy==1.23.4
     #   thinc
 openai==1.59.7
     # via -r requirements/requirements.in
-packaging==26.0
+packaging==26.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -282,7 +282,7 @@ preshed==3.0.13
     #   -r requirements/exec-env-requirements.txt
     #   spacy
     #   thinc
-propcache==0.4.1
+propcache==0.5.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
@@ -328,7 +328,7 @@ python-dateutil==2.9.0.post0
     #   pandas
 python-levenshtein==0.20.8
     # via -r requirements/exec-env-requirements.txt
-pytz==2026.1.post1
+pytz==2026.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
@@ -342,12 +342,12 @@ rapidfuzz==2.15.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   levenshtein
-regex==2026.4.4
+regex==2026.5.9
     # via
     #   -r requirements/exec-env-requirements.txt
     #   nltk
     #   tiktoken
-requests==2.33.0
+requests==2.34.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   azure-core
@@ -359,7 +359,7 @@ requests==2.33.0
     #   tiktoken
     #   translate
     #   vadersentiment
-rich==14.3.3
+rich==15.0.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   typer
@@ -385,7 +385,7 @@ six==1.17.0
     #   -r requirements/exec-env-requirements.txt
     #   langdetect
     #   python-dateutil
-smart-open==7.5.1
+smart-open==7.6.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   weasel
@@ -422,11 +422,11 @@ srsly==2.5.3
     #   weasel
 stemming==1.0.1
     # via -r requirements/exec-env-requirements.txt
-sudachidict-core==20260116
+sudachidict-core==20260428
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sudachipy==0.6.10
+sudachipy==0.6.11
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -462,11 +462,11 @@ tqdm==4.67.3
     #   textacy
 translate==3.6.1
     # via -r requirements/exec-env-requirements.txt
-typeguard==4.5.1
+typeguard==4.5.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   inflect
-typer==0.24.1
+typer==0.25.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -489,11 +489,11 @@ typing-inspection==0.4.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pydantic
-tzdata==2026.1
+tzdata==2026.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pandas
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   requests
