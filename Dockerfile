@@ -30,4 +30,4 @@ COPY --from=builder --chown=65532:65532 /app /app
 
 USER nonroot
 
-ENTRYPOINT ["/app/run.sh"]
+ENTRYPOINT ["/opt/venv/bin/python", "-u", "/app/run_ac.py"]

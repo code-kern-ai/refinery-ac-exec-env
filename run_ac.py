@@ -9,6 +9,13 @@ from hashlib import md5
 from mustache import prepare_and_render_mustache
 
 
+def download_file_a2vybg(url: str, target_file: str) -> None:
+    response = requests.get(url, timeout=60)
+    response.raise_for_status()
+    with open(target_file, "wb") as outfile:
+        outfile.write(response.content)
+
+
 def get_check_data_type_function(data_type: str) -> Tuple[List[Type], Callable]:
     if data_type == "INTEGER":
         return [int], __check_data_type_integer
@@ -205,7 +212,25 @@ async def process_async_llm_calls_a2vybg(
 
 
 if __name__ == "__main__":
-    _, iso2_code, payload_url, data_type = sys.argv
+    if len(sys.argv) != 7:
+        raise ValueError(
+            "Expected arguments: <docbin_url> <attribute_calculators_url> "
+            "<knowledge_url> <iso2_code> <payload_url> <data_type>"
+        )
+
+    (
+        _,
+        docbin_url,
+        attribute_calculators_url,
+        knowledge_url,
+        iso2_code,
+        payload_url,
+        data_type,
+    ) = sys.argv
+
+    download_file_a2vybg(docbin_url, "docbin_full.json")
+    download_file_a2vybg(attribute_calculators_url, "attribute_calculators.py")
+    download_file_a2vybg(knowledge_url, "knowledge.py")
 
     print("Preparing data for attribute calculation.")
 
