@@ -34,7 +34,7 @@ attrs==26.1.0
     #   aiohttp
 azure-ai-inference==1.0.0b9
     # via -r requirements/requirements.in
-azure-core==1.39.0
+azure-core==1.41.0
     # via azure-ai-inference
 beautifulsoup4==4.11.1
     # via -r requirements/exec-env-requirements.txt
@@ -131,6 +131,8 @@ fuzzywuzzy==0.18.0
     # via -r requirements/exec-env-requirements.txt
 google-search-results==2.4.1
     # via -r requirements/exec-env-requirements.txt
+greenlet==3.5.1
+    # via sqlalchemy
 groq==0.4.2
     # via -r requirements/exec-env-requirements.txt
 h11==0.16.0
@@ -178,7 +180,7 @@ jinja2==3.1.6
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-jiter==0.13.0
+jiter==0.15.0
     # via openai
 joblib==1.5.3
     # via
