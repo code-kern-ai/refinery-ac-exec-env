@@ -8,7 +8,7 @@ aiohappyeyeballs==2.6.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   aiohttp
-aiohttp==3.14.0
+aiohttp==3.14.1
     # via -r requirements/exec-env-requirements.txt
 aiosignal==1.4.0
     # via
@@ -22,7 +22,7 @@ annotated-types==0.7.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pydantic
-anyio==4.13.0
+anyio==4.14.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
@@ -188,7 +188,7 @@ joblib==1.5.3
     #   textacy
 knowledge==0.3
     # via -r requirements/exec-env-requirements.txt
-korean-lunar-calendar==0.3.1
+korean-lunar-calendar==0.4.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   holidays
@@ -409,7 +409,7 @@ spacy-loggers==1.0.5
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-sqlalchemy==2.0.50
+sqlalchemy==2.0.51
     # via
     #   -r requirements/exec-env-requirements.txt
     #   knowledge
