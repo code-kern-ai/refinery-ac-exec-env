@@ -22,7 +22,7 @@ annotated-types==0.8.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pydantic
-anyio==4.15.1
+anyio==4.16.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   groq
@@ -48,7 +48,7 @@ breadability==0.1.21
     # via
     #   -r requirements/exec-env-requirements.txt
     #   sumy
-cachetools==7.2.5
+cachetools==7.2.8
     # via
     #   -r requirements/exec-env-requirements.txt
     #   textacy
@@ -81,6 +81,7 @@ click==8.5.0
     #   nltk
     #   spacy
     #   translate
+    #   weasel
 cloudpathlib==0.26.0
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -89,7 +90,7 @@ cloudpickle==3.1.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   joblib
-confection==1.3.3
+confection==1.3.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
@@ -193,7 +194,7 @@ jinja2==3.1.6
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-jiter==0.17.0
+jiter==0.18.0
     # via openai
 joblib==1.6.0
     # via
@@ -259,10 +260,6 @@ murmurhash==1.0.16
     #   preshed
     #   spacy
     #   thinc
-narwhals==2.27.1
-    # via
-    #   -r requirements/exec-env-requirements.txt
-    #   scikit-learn
 networkx==3.6.1
     # via
     #   -r requirements/exec-env-requirements.txt
@@ -295,7 +292,6 @@ openai==1.109.1
 packaging==26.3
     # via
     #   -r requirements/exec-env-requirements.txt
-    #   scikit-optimize
     #   spacy
     #   thinc
     #   weasel
@@ -349,7 +345,7 @@ pyphen==0.18.1
     #   -r requirements/exec-env-requirements.txt
     #   textacy
     #   textstat
-python-dateutil==3.0.0
+python-dateutil==4.0.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   holidays
@@ -377,6 +373,7 @@ requests==2.34.2
     #   azure-core
     #   google-search-results
     #   lexmo
+    #   smart-open
     #   spacy
     #   sumy
     #   textacy
@@ -387,12 +384,12 @@ rich==15.0.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   typer
-scikit-learn==1.9.1
+scikit-learn==1.5.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   scikit-optimize
     #   textacy
-scikit-optimize==0.10.2
+scikit-optimize==0.9.0
     # via -r requirements/exec-env-requirements.txt
 scipy==1.17.1
     # via
@@ -408,8 +405,7 @@ six==1.17.0
     # via
     #   -r requirements/exec-env-requirements.txt
     #   langdetect
-    #   python-dateutil
-smart-open==8.0.4
+smart-open[http]==9.0.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   weasel
@@ -515,7 +511,7 @@ typing-inspection==0.4.4
     # via
     #   -r requirements/exec-env-requirements.txt
     #   pydantic
-tzdata==2026.5
+tzdata==2026.6
     # via
     #   -r requirements/exec-env-requirements.txt
     #   python-dateutil
@@ -531,11 +527,11 @@ wasabi==1.1.3
     #   spacy
     #   thinc
     #   weasel
-weasel==1.0.0
+weasel==1.0.1
     # via
     #   -r requirements/exec-env-requirements.txt
     #   spacy
-wrapt==2.5.1
+wrapt==2.5.2
     # via
     #   -r requirements/exec-env-requirements.txt
     #   smart-open
